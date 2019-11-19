@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/user")
 public class UserController {
 	
+	// 유저메
 	@GetMapping("/")
 	public ModelAndView usermain() throws Exception{
 		ModelAndView mv = new ModelAndView("");
