@@ -9,6 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/user")
 public class UserController {
 	
+	@GetMapping("/")
+	public ModelAndView usermain() throws Exception{
+		ModelAndView mv = new ModelAndView("");
+		return mv;
+	}
 	// 마이페이지
 	@GetMapping("/mypage")
 	public ModelAndView mypage() throws Exception{
