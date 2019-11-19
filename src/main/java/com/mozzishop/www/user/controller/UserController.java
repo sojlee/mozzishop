@@ -1,6 +1,7 @@
 package com.mozzishop.www.user.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,6 +42,12 @@ public class UserController {
 	
 	@GetMapping("/myask")
 	public ModelAndView myask() throws Exception{
+		ModelAndView mv = new ModelAndView("");
+		return mv;
+	}
+	
+	@PostMapping("/myask")
+	public ModelAndView add() throws Exception{
 		ModelAndView mv = new ModelAndView("");
 		return mv;
 	}
