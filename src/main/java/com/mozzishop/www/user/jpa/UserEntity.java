@@ -24,7 +24,7 @@ public class UserEntity{
 	private String id;
 	
 	@Column(nullable=false)
-	private String pw;
+	private String password;
 	
 	@Column
 	private String phone;
@@ -42,7 +42,7 @@ public class UserEntity{
 	private String nickname;
 	
 	@Column(nullable=false)
-	private LocalDateTime signdate;
+	private LocalDateTime signDate;
 	
 	@Column
 	@Enumerated(EnumType.STRING)
@@ -53,16 +53,16 @@ public class UserEntity{
 	private SocialType socialType;
 	
 	@Builder
-	public UserEntity(String id, String pw, String phone, String email, String birth,
-			String username, String nickname, LocalDateTime signdate, Grade grade, SocialType socialType) {
+	public UserEntity(String id, String password, String phone, String email, String birth,
+			String username, String nickname, LocalDateTime signDate, Grade grade, SocialType socialType) {
 		this.id = id;
-		this.pw = pw;
+		this.password = password;
 		this.phone = phone;
 		this.email = email;
 		this.birth = birth;
 		this.username = username;
 		this.nickname = nickname;
-		this.signdate = signdate;
+		this.signDate = signDate;
 		this.grade = grade;
 		this.socialType = socialType;
 	}
