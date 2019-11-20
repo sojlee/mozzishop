@@ -26,6 +26,15 @@ public class UserEntity{
 	@Column(nullable=false)
 	private String pw;
 	
+	@Column
+	private String phone;
+	
+	@Column
+	private String email;
+	
+	@Column
+	private String birth;
+	
 	@Column(nullable=false)
 	private String username;
 	
@@ -44,10 +53,13 @@ public class UserEntity{
 	private SocialType socialType;
 	
 	@Builder
-	public UserEntity(String id, String pw, String username, String nickname, 
-			LocalDateTime signdate, Grade grade, SocialType socialType) {
+	public UserEntity(String id, String pw, String phone, String email, String birth,
+			String username, String nickname, LocalDateTime signdate, Grade grade, SocialType socialType) {
 		this.id = id;
 		this.pw = pw;
+		this.phone = phone;
+		this.email = email;
+		this.birth = birth;
 		this.username = username;
 		this.nickname = nickname;
 		this.signdate = signdate;
