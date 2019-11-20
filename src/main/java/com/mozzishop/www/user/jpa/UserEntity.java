@@ -28,4 +28,10 @@ public class UserEntity {
 	@Column(nullable=false)
 	private String signdate;
 	
+	@Column
+	private Grade grade;
+	
+	@Column
+	private SocialType socialType;
+	
 }
