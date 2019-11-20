@@ -1,16 +1,23 @@
 package com.mozzishop.www.user.jpa;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name="user")
-@Data
-public class UserEntity {
+public class UserEntity{
 	
 	@Id
 	@Column(nullable=false)
@@ -26,12 +33,26 @@ public class UserEntity {
 	private String nickname;
 	
 	@Column(nullable=false)
-	private String signdate;
+	private LocalDateTime signdate;
 	
 	@Column
+	@Enumerated(EnumType.STRING)
 	private Grade grade;
 	
 	@Column
+	@Enumerated(EnumType.STRING)
 	private SocialType socialType;
+	
+	@Builder
+	public UserEntity(String id, String pw, String username, String nickname, 
+			LocalDateTime signdate, Grade grade, SocialType socialType) {
+		this.id = id;
+		this.pw = pw;
+		this.username = username;
+		this.nickname = nickname;
+		this.signdate = signdate;
+		this.grade = grade;
+		this.socialType = socialType;
+	}
 	
 }
