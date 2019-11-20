@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="user")
-public class UserEntity{
+public class User{
 	
 	@Id
 	@Column(nullable=false)
@@ -53,7 +53,7 @@ public class UserEntity{
 	private SocialType socialType;
 	
 	@Builder
-	public UserEntity(String id, String password, String phone, String email, String birth,
+	public User(String id, String password, String phone, String email, String birth,
 			String username, String nickname, LocalDateTime signDate, Grade grade, SocialType socialType) {
 		this.id = id;
 		this.password = password;
