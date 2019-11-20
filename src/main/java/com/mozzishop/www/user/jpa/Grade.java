@@ -20,5 +20,9 @@ public enum Grade {
 	public String getValue() {
 		return grade;
 	}
+	
+	public boolean isEqueals(String authority) {
+		return this.getGradeType().equals(authority);
+	}
 
 }
