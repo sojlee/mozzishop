@@ -35,13 +35,13 @@ public class UserEntity{
 	@Column
 	private String birth;
 	
-	@Column(nullable=false)
+	@Column
 	private String username;
 	
-	@Column(nullable=false)
+	@Column
 	private String nickname;
 	
-	@Column(nullable=false)
+	@Column
 	private LocalDateTime signDate;
 	
 	@Column
