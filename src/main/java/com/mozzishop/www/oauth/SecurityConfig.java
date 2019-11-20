@@ -1,7 +1,13 @@
 package com.mozzishop.www.oauth;
 
-import java.util.List;
+import static com.mozzishop.www.user.jpa.SocialType.FACEBOOK;
+import static com.mozzishop.www.user.jpa.SocialType.GOOGLE;
+import static com.mozzishop.www.user.jpa.SocialType.KAKAO;
+import static com.mozzishop.www.user.jpa.Grade.USER;
+import static com.mozzishop.www.user.jpa.Grade.CREATOR;
+import static com.mozzishop.www.user.jpa.Grade.ADMIN;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -21,9 +27,6 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.mozzishop.www.user.jpa.CustomOAuth2Provider;
-import static com.mozzishop.www.user.jpa.SocialType.FACEBOOK;
-import static com.mozzishop.www.user.jpa.SocialType.GOOGLE;
-import static com.mozzishop.www.user.jpa.SocialType.KAKAO;
 
 
 @Configuration
@@ -39,6 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/facebook").hasAuthority(FACEBOOK.getRoleType())
                 .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
                 .antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
+                .antMatchers("/user/**").hasAuthority(USER.getGradeType())
+                .antMatchers("/user/**", "/creator/**").hasAuthority(CREATOR.getGradeType())
+                .antMatchers("/admin/**").hasAuthority(ADMIN.getGradeType())
                 .anyRequest().authenticated()
             .and()
                 .oauth2Login()
