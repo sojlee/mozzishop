@@ -2,6 +2,7 @@ package com.mozzishop.www.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mozzishop.www.resolver.SocialUser;
 import com.mozzishop.www.user.jpa.User;
@@ -10,13 +11,15 @@ import com.mozzishop.www.user.jpa.User;
 public class MainController {
 	
 	@GetMapping("/")
-	public String mainpage(){
-		return "main";
+	public ModelAndView mainpage(){
+		ModelAndView mv = new ModelAndView("main");
+		return mv;
 	}
 	
 	@GetMapping("/login")
-	public String login() {
-		return "login";
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView("login");
+		return mv;
 	}
 	
 	@GetMapping("/loginSuccess")
