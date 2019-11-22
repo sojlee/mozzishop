@@ -1,13 +1,13 @@
 package com.mozzishop.www.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mozzishop.www.resolver.SocialUser;
 import com.mozzishop.www.user.jpa.User;
 
-@RestController
+@Controller
 public class MainController {
 	
 	@GetMapping("/")
@@ -24,7 +24,7 @@ public class MainController {
 	
 	@GetMapping("/loginSuccess")
 	public String loginComplete(@SocialUser User user) {
-		return "redirect:/board/list";
+		return "redirect:/";
 	}
 
 }
