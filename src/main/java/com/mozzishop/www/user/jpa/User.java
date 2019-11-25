@@ -36,6 +36,10 @@ public class User{
 
 	    @Column
 	    private String pincipal;
+	    
+	    @Column
+	    @Enumerated(EnumType.STRING)
+	    private Grade grade = Grade.USER;
 
 	    @Column
 	    @Enumerated(EnumType.STRING)
@@ -48,11 +52,12 @@ public class User{
 	    private LocalDateTime updatedDate;
 
 	    @Builder
-	    public User(String name, String password, String email, String pincipal, SocialType socialType, LocalDateTime createdDate, LocalDateTime updatedDate) {
+	    public User(String name, String password, String email, String pincipal, Grade grade, SocialType socialType, LocalDateTime createdDate, LocalDateTime updatedDate) {
 	        this.name = name;
 	        this.password = password;
 	        this.email = email;
 	        this.pincipal = pincipal;
+	        this.grade = grade;
 	        this.socialType = socialType;
 	        this.createdDate = createdDate;
 	        this.updatedDate = updatedDate;
