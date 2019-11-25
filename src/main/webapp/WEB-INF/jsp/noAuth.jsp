@@ -8,7 +8,7 @@
 </head>
 <body>
 <script>
-alert("로그인에 실패했습니다. 관리자에게 문의하세요. 로그인 화면으로 이동합니다.");
+alert("권한이 없습니다. 메인으로 이동합니다.");
 location.href="/login";
 </script>
 </body>

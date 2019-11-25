@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-alert("로그인에 실패했습니다. 관리자에게 문의하세요. 로그인 화면으로 이동합니다.");
-location.href="/login";
-</script>
+I'm user ~~
 </body>
 </html>

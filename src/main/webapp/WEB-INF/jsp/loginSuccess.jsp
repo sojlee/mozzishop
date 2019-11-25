@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-Hi?
+Login Success ... 
+사용자 정보 받기. 
 </body>
 </html>
