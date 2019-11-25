@@ -38,12 +38,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         http
             .authorizeRequests()
-                .antMatchers("/", "/oauth2/**", "/login/**",  "/resources/css/**", "/resources/**", "/resources/scss/**", "re", "/resources/js/**", "/console/**").permitAll()
+                .antMatchers("/", "/oauth2/**", "/login/**", "/resources/**", "/console/**").permitAll()
                 .antMatchers("/facebook").hasAuthority(FACEBOOK.getRoleType())
                 .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
                 .antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
                 .antMatchers("/user/**").hasAuthority(USER.getGradeType())
-                .antMatchers("/user/**", "/creator/**").hasAuthority(CREATOR.getGradeType())
+                .antMatchers("/creator/**").hasAuthority(CREATOR.getGradeType())
                 .antMatchers("/admin/**").hasAuthority(ADMIN.getGradeType())
                 .anyRequest().authenticated()
             .and()
@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
             .and()
                 .formLogin()
-                .successForwardUrl("/board/list")
+                .successForwardUrl("/")
             .and()
                 .logout()
                 .logoutUrl("/logout")

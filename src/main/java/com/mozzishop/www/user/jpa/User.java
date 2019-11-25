@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,11 +20,50 @@ import lombok.NoArgsConstructor;
 @Table(name="user")
 public class User{
 	
-	@Id
-	@Column(nullable=false)
-	private String id;
+	    @Id
+	    @Column
+	    @GeneratedValue
+	    private Long idx;
+
+	    @Column
+	    private String name;
+
+	    @Column
+	    private String password;
+
+	    @Column
+	    private String email;
+
+	    @Column
+	    private String pincipal;
+
+	    @Column
+	    @Enumerated(EnumType.STRING)
+	    private SocialType socialType;
+
+	    @Column
+	    private LocalDateTime createdDate;
+
+	    @Column
+	    private LocalDateTime updatedDate;
+
+	    @Builder
+	    public User(String name, String password, String email, String pincipal, SocialType socialType, LocalDateTime createdDate, LocalDateTime updatedDate) {
+	        this.name = name;
+	        this.password = password;
+	        this.email = email;
+	        this.pincipal = pincipal;
+	        this.socialType = socialType;
+	        this.createdDate = createdDate;
+	        this.updatedDate = updatedDate;
+	    }
 	
-	@Column(nullable=false)
+	/*
+	@Id
+	@Column
+	private String idx;
+	
+	@Column
 	private String password;
 	
 	@Column
@@ -65,6 +105,5 @@ public class User{
 		this.signDate = signDate;
 		this.grade = grade;
 		this.socialType = socialType;
-	}
-	
+	}*/
 }

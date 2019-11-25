@@ -1,5 +1,9 @@
 package com.mozzishop.www.resolver;
 
+import static com.mozzishop.www.user.jpa.SocialType.FACEBOOK;
+import static com.mozzishop.www.user.jpa.SocialType.GOOGLE;
+import static com.mozzishop.www.user.jpa.SocialType.KAKAO;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,10 +27,6 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import com.mozzishop.www.user.jpa.SocialType;
 import com.mozzishop.www.user.jpa.User;
 import com.mozzishop.www.user.jpa.UserRepository;
-
-import static com.mozzishop.www.user.jpa.SocialType.KAKAO;
-import static com.mozzishop.www.user.jpa.SocialType.GOOGLE;
-import static com.mozzishop.www.user.jpa.SocialType.FACEBOOK;
 
 @Component
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
@@ -55,7 +55,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
                 Map<String, Object> map = authentication.getPrincipal().getAttributes();
                 User convertUser = convertUser(authentication.getAuthorizedClientRegistrationId(), map);
-
+              
                 user = userRepository.findByEmail(convertUser.getEmail());
                 if (user == null) { user = userRepository.save(convertUser); }
 
@@ -77,22 +77,22 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     private User getModernUser(SocialType socialType, Map<String, Object> map) {
         return User.builder()
-                .username(String.valueOf(map.get("name")))
+                .name(String.valueOf(map.get("name")))
                 .email(String.valueOf(map.get("email")))
-                .id(String.valueOf(map.get("id")))
+                .pincipal(String.valueOf(map.get("id")))
                 .socialType(socialType)
-                .signDate(LocalDateTime.now())
+                .createdDate(LocalDateTime.now())
                 .build();
     }
 
     private User getKaKaoUser(Map<String, Object> map) {
         Map<String, String> propertyMap = (HashMap<String, String>) map.get("properties");
         return User.builder()
-                .nickname(propertyMap.get("nickname"))
+                .name(propertyMap.get("nickname"))
                 .email(String.valueOf(map.get("kaccount_email")))
-                .id(String.valueOf(map.get("id")))
+                .pincipal(String.valueOf(map.get("id")))
                 .socialType(KAKAO)
-                .signDate(LocalDateTime.now())
+                .createdDate(LocalDateTime.now())
                 .build();
     }
 
