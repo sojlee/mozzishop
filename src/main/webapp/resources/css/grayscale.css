@@ -5,7 +5,7 @@
  */
 
 #mainNav {
-  min-height: 40px;
+  min-height: 56px;
   background-color: #fff;
 }
 
@@ -63,10 +63,6 @@
   #mainNav.navbar-shrink {
     background-color: #fff;
   }
-  	#mainNav.navbar-hide {
-		transform: translateY(-300%);
-	}
-	
   #mainNav.navbar-shrink .navbar-brand {
     color: #161616;
   }
