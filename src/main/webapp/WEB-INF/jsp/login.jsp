@@ -26,10 +26,11 @@
 
 <body>
 	
-							
-		<a href="/oauth2/authorization/google"><img class="google" src="https://pbs.twimg.com/profile_images/770139154898382848/ndFg-IDH_400x400.jpg" alt="google_login_btn"></a>
-		<a href="/oauth2/authorization/facebook"><img class="facebook" src="./resources/img/facebook-logo.png" alt="facebook_login_btn"></a>
-	<a href="/oauth2/authorization/kakao"><img class="kakao" src="./resources/img/kakao_logo.png" alt="kakao_login_btn"></a>
+	<div class="social-logins">
+			<a href="/oauth2/authorization/google"><img class="google" src="https://pbs.twimg.com/profile_images/770139154898382848/ndFg-IDH_400x400.jpg" alt="google_login_btn"></a>
+			<a href="/oauth2/authorization/facebook"><img class="facebook" src="./resources/img/facebook-logo.png" alt="facebook_login_btn"></a>
+			<a href="/oauth2/authorization/kakao"><img class="kakao" src="./resources/img/kakao_logo.png" alt="kakao_login_btn"></a>		
+	</div>			
 
 </body>
 </html>

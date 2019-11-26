@@ -39,7 +39,7 @@ public class User{
 	    
 	    @Column
 	    @Enumerated(EnumType.STRING)
-	    private Grade grade = Grade.USER;
+	    private Grade grade;
 
 	    @Column
 	    @Enumerated(EnumType.STRING)
@@ -57,7 +57,7 @@ public class User{
 	        this.password = password;
 	        this.email = email;
 	        this.pincipal = pincipal;
-	        this.grade = grade;
+	        this.grade = Grade.USER;
 	        this.socialType = socialType;
 	        this.createdDate = createdDate;
 	        this.updatedDate = updatedDate;
