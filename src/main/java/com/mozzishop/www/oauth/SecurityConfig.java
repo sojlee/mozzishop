@@ -1,11 +1,11 @@
 package com.mozzishop.www.oauth;
 
+import static com.mozzishop.www.user.jpa.Grade.ADMIN;
+import static com.mozzishop.www.user.jpa.Grade.CREATOR;
+import static com.mozzishop.www.user.jpa.Grade.USER;
 import static com.mozzishop.www.user.jpa.SocialType.FACEBOOK;
 import static com.mozzishop.www.user.jpa.SocialType.GOOGLE;
 import static com.mozzishop.www.user.jpa.SocialType.KAKAO;
-import static com.mozzishop.www.user.jpa.Grade.USER;
-import static com.mozzishop.www.user.jpa.Grade.CREATOR;
-import static com.mozzishop.www.user.jpa.Grade.ADMIN;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2Clien
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
@@ -32,13 +33,18 @@ import com.mozzishop.www.user.jpa.CustomOAuth2Provider;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception{
+		web.ignoring().antMatchers("/resources/**");
+	}
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         http
             .authorizeRequests()
-                .antMatchers("/", "/oauth2/**", "/login/**", "/resources/**", "/console/**").permitAll()
+                .antMatchers("/", "/oauth2/**", "/login/**", "/product/**", "/console/**").permitAll()
                 .antMatchers("/facebook").hasAuthority(FACEBOOK.getRoleType())
                 .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
                 .antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
