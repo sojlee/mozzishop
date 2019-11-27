@@ -20,6 +20,11 @@
 
 	<dependencies>
 	
+				<dependency>
+					<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-taglibs</artifactId>
+				</dependency>
+	
 			<!-- BootStrap -->
 				<dependency>
 					<groupId>org.webjars</groupId>
