@@ -1,13 +1,11 @@
 package com.mozzishop.www.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mozzishop.www.resolver.SocialUser;
 import com.mozzishop.www.user.jpa.User;
-import com.mozzishop.www.user.service.UserService;
 
 @Controller
 public class MainController {
