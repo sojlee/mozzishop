@@ -57,7 +57,11 @@ public class User{
 	        this.password = password;
 	        this.email = email;
 	        this.pincipal = pincipal;
-	        this.grade = Grade.USER;
+	        if(String.valueOf(grade).isEmpty()) {
+	        	this.grade = Grade.USER;
+	        }else {
+	        	this.grade = grade;
+	        }
 	        this.socialType = socialType;
 	        this.createdDate = createdDate;
 	        this.updatedDate = updatedDate;
