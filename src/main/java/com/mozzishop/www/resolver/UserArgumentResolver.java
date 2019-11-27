@@ -55,8 +55,13 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
                 Map<String, Object> map = authentication.getPrincipal().getAttributes();
                 User convertUser = convertUser(authentication.getAuthorizedClientRegistrationId(), map);
-              
-                user = userRepository.findByEmail(convertUser.getEmail());
+                // principal이 null이라면 Google, Facebook 계정 
+                if(convertUser.getPincipal().isEmpty()) {
+                	user = userRepository.findByEmail(convertUser.getEmail());
+                }else {
+                	user = userRepository.findByPincipal(convertUser.getPincipal());
+                }
+                
                 if (user == null) { user = userRepository.save(convertUser); }
 
                 setRoleIfNotSame(user, authentication, map);
