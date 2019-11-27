@@ -2,6 +2,7 @@ package com.mozzishop.www.user.jpa;
 
 import java.time.LocalDateTime;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,14 +11,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Table(name="user")
+@ToString
 public class User{
 	
 	    @Id
@@ -60,13 +64,16 @@ public class User{
 	        if(String.valueOf(grade).isEmpty()) {
 	        	this.grade = Grade.USER;
 	        }else {
+	        	System.out.println("=======================");
+	        	System.out.println(String.valueOf(grade));
+	        	System.out.println("=======================");
 	        	this.grade = grade;
 	        }
 	        this.socialType = socialType;
 	        this.createdDate = createdDate;
 	        this.updatedDate = updatedDate;
 	    }
-	
+
 	/*
 	@Id
 	@Column
