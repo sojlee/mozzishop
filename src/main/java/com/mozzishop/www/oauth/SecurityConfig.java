@@ -1,3 +1,4 @@
+
 package com.mozzishop.www.oauth;
 
 import static com.mozzishop.www.user.jpa.Grade.ADMIN;
