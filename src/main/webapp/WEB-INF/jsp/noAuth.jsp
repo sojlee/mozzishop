@@ -9,7 +9,7 @@
 <body>
 <script>
 alert("권한이 없습니다. 메인으로 이동합니다.");
-location.href="/login";
+location.href="http://localhost:8080/";
 </script>
 </body>
 </html>

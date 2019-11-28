@@ -6,13 +6,15 @@ import static com.mozzishop.www.user.jpa.SocialType.KAKAO;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -52,31 +54,37 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     private User getUser(User user, HttpSession session) {
-    	// 새로 가입하는 User일 때 
+    	// 새로 가입하는 User
         if(user == null) {
             try {
                 OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
                 Map<String, Object> map = authentication.getPrincipal().getAttributes();
+                // 로그인 시도해서 입력받은 사용자 정보 converUser에 담기. 
                 User convertUser = convertUser(authentication.getAuthorizedClientRegistrationId(), map);
-                // principal이 null이라면 Google, Facebook 계정 
+                // principal이 null이라면 Google, Facebook 계정, 아니라면 Kakao계정으로 찾아서 user에 담기. 
                 if(convertUser.getPincipal().equals("null")) {
                 	user = userRepository.findByEmail(convertUser.getEmail());
                 }else {
                 	user = userRepository.findByPincipal(convertUser.getPincipal());
                 }
+                System.out.println("convertUser : "+convertUser.toString());
                 
+                // 신규 회원인 경우 DB에 저장
                 if (user == null) { user = userRepository.save(convertUser); }
-
+        
                 setRoleIfNotSame(user, authentication, map);
                 session.setAttribute("user", user);
             } catch (ClassCastException e) {
                 return user;
             }
         }
+      
         return user;
     }
-
+    
+    // 소셜 타입 별로 user정보와 매핑.  
     private User convertUser(String authority, Map<String, Object> map) {
+    	
         if(FACEBOOK.isSocialTypeEquals(authority)) return getModernUser(FACEBOOK, map);
         else if(GOOGLE.isSocialTypeEquals(authority)) return getModernUser(GOOGLE, map);
         else if(KAKAO.isSocialTypeEquals(authority)) return getKaKaoUser(map);
@@ -85,7 +93,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
   
-
+    // SocialType을 파라미터로 map의 값으로부터 매핑. 
 	private User getModernUser(SocialType socialType, Map<String, Object> map) {
         return User.builder()
                 .name(String.valueOf(map.get("name")))
@@ -96,7 +104,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 .createdDate(LocalDateTime.now())
                 .build();
     }
-
+	
     private User getKaKaoUser(Map<String, Object> map) {
         Map<String, String> propertyMap = (HashMap<String, String>) map.get("properties");
         return User.builder()
@@ -111,7 +119,13 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     private void setRoleIfNotSame(User user, OAuth2AuthenticationToken authentication, Map<String, Object> map) {
         if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority(user.getSocialType().getRoleType()))) {
-            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(map, "N/A", AuthorityUtils.createAuthorityList(user.getSocialType().getRoleType())));
+            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(map, "N/A", 
+            		AuthorityUtils.createAuthorityList(user.getSocialType().getRoleType())));
+        }
+        if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority(user.getGrade().getGradeType()))) {
+        	SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(map, "N/A", 
+        			AuthorityUtils.createAuthorityList(user.getGrade().getGradeType())));
+            System.out.println("권한이 없습니다!!!!!!!!!!!");
         }
     }
 }
