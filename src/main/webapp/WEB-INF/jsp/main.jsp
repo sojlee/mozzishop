@@ -1,7 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="security"
+  uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +59,7 @@
     </div>
   </nav>
 
+
   <!-- Header -->
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
@@ -66,7 +70,15 @@
       </div>
     </div>
   </header>
-
+  hello
+<security:authorize access="hasRole('ROLE_USER')">
+    This text is only visible to a user
+    <br/>
+</security:authorize>
+<security:authorize access="hasRole('ROLE_ADMIN')">
+    This text is only visible to an admin
+    <br/>
+</security:authorize>
   <!-- About Section -->
   <section id="about" class="about-section text-center">
     <div class="container">

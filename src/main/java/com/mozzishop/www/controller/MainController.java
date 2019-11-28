@@ -1,20 +1,33 @@
 package com.mozzishop.www.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mozzishop.www.resolver.SocialUser;
+import com.mozzishop.www.user.jpa.Grade;
 import com.mozzishop.www.user.jpa.User;
+import com.mozzishop.www.user.jpa.UserRepository;
 
 @Controller
 public class MainController {
+	
+	@Autowired
+	UserRepository userRepository;
 	
 
 	
 	@GetMapping("/")
 	public ModelAndView mainpage(){
 		ModelAndView mv = new ModelAndView("main");
+		userRepository.MakeAdmin(Grade.CREATOR, 1);
+		userRepository.MakeAdmin(Grade.USER, 2);
+		userRepository.MakeAdmin(Grade.ADMIN, 3);
+		//User user = userRepository.findByGrade(Grade.ADMIN);
+	//	mv.addObject("list", String.valueOf(user));
 		return mv;
 	}
 	
@@ -28,7 +41,7 @@ public class MainController {
 	public ModelAndView loginComplete(@SocialUser User user) {
 		System.out.println(user.toString());
 		ModelAndView mv = new ModelAndView("loginSuccess");
-	
+		
 		return mv;
 	}
 	
