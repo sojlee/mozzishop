@@ -80,7 +80,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         if(FACEBOOK.isSocialTypeEquals(authority)) return getModernUser(FACEBOOK, map);
         else if(GOOGLE.isSocialTypeEquals(authority)) return getModernUser(GOOGLE, map);
         else if(KAKAO.isSocialTypeEquals(authority)) return getKaKaoUser(map);
-     
+        
         return null;
     }
 
