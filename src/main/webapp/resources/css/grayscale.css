@@ -288,6 +288,10 @@ a:focus, a:hover {
   background-color: #64a19d !important;
 }
 
+.bg-light-gray {
+	background-color: #efefef !important;
+}
+
 .text-primary {
   color: #64a19d !important;
 }
