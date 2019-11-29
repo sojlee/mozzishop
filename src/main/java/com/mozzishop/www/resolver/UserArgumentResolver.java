@@ -61,11 +61,17 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 Map<String, Object> map = authentication.getPrincipal().getAttributes();
                 // 로그인 시도해서 입력받은 사용자 정보 converUser에 담기. 
                 User convertUser = convertUser(authentication.getAuthorizedClientRegistrationId(), map);
-                // principal이 null이라면 Google, Facebook 계정, 아니라면 Kakao계정으로 찾아서 user에 담기. 
-                
+               
+                // SocialType이 KAKAO면 
                 if(convertUser.getSocialType()==KAKAO){
-                	user = userRepository.findByPrincipal(convertUser.getPrincipal());
+                	// user로부터 email을 받지 못하거나, user에 등록된 이메일이 없으면 principal로 탐색.
+                	if(convertUser.getEmail().equals("null")) 
+                		user = userRepository.findByPrincipal(convertUser.getPrincipal());
+                	// user로부터 email을 받으면, 다른 소셜 로그인으로 인해 DB에 중복된 이메일이 있는지 탐색.
+                	else 
+                		user = userRepository.findByEmail(convertUser.getEmail());
                 }else {
+                	// SocialType이 Google, Facebook일 때.
                 	user = userRepository.findByEmail(convertUser.getEmail());
                 }
                 System.out.println("convertUser : "+convertUser.toString());
