@@ -33,7 +33,22 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Hihihi</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      	Hi ! 
+		<security:authorize access="hasRole('ROLE_USER')">
+		   user
+		    <br/>
+		</security:authorize>
+		<security:authorize access="hasRole('ROLE_CREATOR')">
+		    creator
+		    <br/>
+		</security:authorize>
+		<security:authorize access="hasRole('ROLE_ADMIN')">
+		    admin
+		    <br/>
+		</security:authorize>
+      
+      </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>

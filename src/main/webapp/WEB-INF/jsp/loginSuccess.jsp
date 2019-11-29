@@ -9,6 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<script>
+var username = '${username}';
+alert("환영합니다 ! "+username+ "님");
+location.href='http://localhost:8080/';
+</script>
+
 Login Success ... <br/>
 사용자 정보 받기. <br/>
 
@@ -24,6 +31,7 @@ Login Success ... <br/>
     This text is only visible to an admin
     <br/>
 </security:authorize>
+
 
 </body>
 </html>

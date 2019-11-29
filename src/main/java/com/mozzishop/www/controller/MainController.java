@@ -15,11 +15,7 @@ import com.mozzishop.www.user.service.UserService;
 
 @Controller
 public class MainController {
-	
-	/*
-	@Autowired
-	UserRepository userRepository;
-	*/
+
 	@Autowired 
 	UserService userService;
 	
@@ -27,12 +23,6 @@ public class MainController {
 	public ModelAndView mainpage(){
 		
 		ModelAndView mv = new ModelAndView("main");
-		User user = userService.findByEmail("720sojung@gmail.com ");
-		userService.upgradeUserToAdmin(user);
-		/* userRepository.MakeAdmin(Grade.CREATOR, 1);
-		userRepository.MakeAdmin(Grade.USER, 2);
-		userRepository.MakeAdmin(Grade.ADMIN, 3);
-		*/
 		//User user = userRepository.findByGrade(Grade.ADMIN);
 	//	mv.addObject("list", String.valueOf(user));
 		return mv;
@@ -48,7 +38,7 @@ public class MainController {
 	public ModelAndView loginComplete(@SocialUser User user) {
 		System.out.println(user.toString());
 		ModelAndView mv = new ModelAndView("loginSuccess");
-		
+		mv.addObject("username", user.getName());
 		return mv;
 	}
 	
