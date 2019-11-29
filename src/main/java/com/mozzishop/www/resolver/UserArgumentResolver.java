@@ -62,10 +62,11 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 // 로그인 시도해서 입력받은 사용자 정보 converUser에 담기. 
                 User convertUser = convertUser(authentication.getAuthorizedClientRegistrationId(), map);
                 // principal이 null이라면 Google, Facebook 계정, 아니라면 Kakao계정으로 찾아서 user에 담기. 
-                if(convertUser.getPincipal().equals("null")) {
-                	user = userRepository.findByEmail(convertUser.getEmail());
+                
+                if(convertUser.getSocialType()==KAKAO){
+                	user = userRepository.findByPrincipal(convertUser.getPrincipal());
                 }else {
-                	user = userRepository.findByPincipal(convertUser.getPincipal());
+                	user = userRepository.findByEmail(convertUser.getEmail());
                 }
                 System.out.println("convertUser : "+convertUser.toString());
                 
@@ -98,7 +99,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return User.builder()
                 .name(String.valueOf(map.get("name")))
                 .email(String.valueOf(map.get("email")))
-                .pincipal(String.valueOf(map.get("id")))
+                .principal(String.valueOf(map.get("id")))
                 .socialType(socialType)
                 .grade(Grade.USER)
                 .createdDate(LocalDateTime.now())
@@ -110,7 +111,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return User.builder()
                 .name(propertyMap.get("nickname"))
                 .email(String.valueOf(map.get("kaccount_email")))
-                .pincipal(String.valueOf(map.get("id")))
+                .principal(String.valueOf(map.get("id")))
                 .socialType(KAKAO)
                 .grade(Grade.USER)
                 .createdDate(LocalDateTime.now())
