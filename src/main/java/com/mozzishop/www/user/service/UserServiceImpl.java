@@ -12,28 +12,23 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	UserRepository userRepository;
-
-	@Override
-	public void upgradeUserToCreator(User user) {
-		// TODO Auto-generated method stub
-		user.builder()
-			.grade(Grade.CREATOR);
-		userRepository.save(user);
-		
-	}
-
-	@Override
-	public void upgradeUserToAdmin(User user) {
-		// TODO Auto-generated method stub
-		user.builder()
-		.grade(Grade.ADMIN);
-		userRepository.save(user);
-	}
-
+	
 	@Override
 	public User findByEmail(String email) {
 		// TODO Auto-generated method stub
 		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public User findByPrincipal(String principle) {
+		// TODO Auto-generated method stub
+		return userRepository.findByPrincipal(principle);
+	}
+
+	@Override
+	public void ChangeGrade(Grade grade, long idx) {
+		// TODO Auto-generated method stub
+		userRepository.ChangeGrade(grade, idx);
 	}
 
 
