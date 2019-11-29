@@ -39,7 +39,7 @@ public class User{
 	    private String email;
 
 	    @Column
-	    private String pincipal;
+	    private String principal;
 	    
 	    @Column
 	    @Enumerated(EnumType.STRING)
@@ -56,11 +56,11 @@ public class User{
 	    private LocalDateTime updatedDate;
 
 	    @Builder
-	    public User(String name, String password, String email, String pincipal, Grade grade, SocialType socialType, LocalDateTime createdDate, LocalDateTime updatedDate) {
+	    public User(String name, String password, String email, String principal, Grade grade, SocialType socialType, LocalDateTime createdDate, LocalDateTime updatedDate) {
 	        this.name = name;
 	        this.password = password;
 	        this.email = email;
-	        this.pincipal = pincipal;
+	        this.principal = principal;
 	        if(String.valueOf(grade).isEmpty()) {
 	        	this.grade = Grade.USER;
 	        }else {

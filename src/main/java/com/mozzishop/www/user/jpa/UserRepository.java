@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, String>{
 	
 	User findByEmail(String email);
 
-	User findByPincipal(String pincipal);
+	User findByPrincipal(String principal);
 	
 	List<User> findAllByGrade(Grade grade);
 	
@@ -23,6 +23,6 @@ public interface UserRepository extends JpaRepository<User, String>{
 	@Modifying
 	@Transactional
 	@Query("UPDATE User SET grade = :grade WHERE idx = :idx")
-	void MakeAdmin(Grade grade, long idx);
+	void ChangeGrade(Grade grade, long idx);
 
 }
