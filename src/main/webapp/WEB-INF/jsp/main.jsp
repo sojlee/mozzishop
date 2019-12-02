@@ -56,9 +56,10 @@
    	<security:authorize access="isAuthenticated()">
 
 	<a href="${CONTEXT }/login">로그아웃</a>
-
+	<a href="${CONTEXT }/user/myinfo">마이페이지</a>
 	</security:authorize>
 
+	
 
   <!-- Footer -->
   <footer class="bg-light-gray small text-center text-black-50">

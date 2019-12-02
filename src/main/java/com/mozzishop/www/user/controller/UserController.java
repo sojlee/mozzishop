@@ -17,9 +17,10 @@ public class UserController {
 		return mv;
 	}
 	// 마이페이지
-	@GetMapping("/mypage")
+	@GetMapping("/myinfo")
 	public ModelAndView mypage() throws Exception{
-		ModelAndView mv = new ModelAndView("User");
+		ModelAndView mv = new ModelAndView("user/myinfo");
+		mv.addObject("list", "My Info Page");
 		return mv;
 	}
 	// 장바구니
