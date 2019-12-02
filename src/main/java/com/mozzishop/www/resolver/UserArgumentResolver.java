@@ -124,11 +124,8 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 .build();
     }
 
+    // 사용자가 권한을 가지고 있는지 체크, 없다면 역할에 따른 권한을 부여한다. 
     private void setRoleIfNotSame(User user, OAuth2AuthenticationToken authentication, Map<String, Object> map) {
-        if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority(user.getSocialType().getRoleType()))) {
-            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(map, "N/A", 
-            		AuthorityUtils.createAuthorityList(user.getSocialType().getRoleType())));
-        }
         if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority(user.getGrade().getGradeType()))) {
         	SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(map, "N/A", 
         			AuthorityUtils.createAuthorityList(user.getGrade().getGradeType())));
