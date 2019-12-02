@@ -3,19 +3,21 @@ package com.mozzishop.www.oauth;
 
 import static com.mozzishop.www.user.jpa.Grade.ADMIN;
 import static com.mozzishop.www.user.jpa.Grade.CREATOR;
-import static com.mozzishop.www.user.jpa.Grade.USER;
-import static com.mozzishop.www.user.jpa.SocialType.FACEBOOK;
-import static com.mozzishop.www.user.jpa.SocialType.GOOGLE;
-import static com.mozzishop.www.user.jpa.SocialType.KAKAO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +26,7 @@ import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -57,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .headers().frameOptions().disable()
             .and()
-                .exceptionHandling()
+                .exceptionHandling().accessDeniedPage("/AccessDenied")
                 .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
             .and()
                 .formLogin()
@@ -88,6 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return new InMemoryClientRegistrationRepository(registrations);
     }
+    
 
     private ClientRegistration getRegistration(OAuth2ClientProperties clientProperties, String client) {
         if ("google".equals(client)) {

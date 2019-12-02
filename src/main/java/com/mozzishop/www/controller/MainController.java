@@ -28,6 +28,11 @@ public class MainController {
 		return mv;
 	}
 	
+	@GetMapping("/logout")
+	public String logout() {
+		return "logout";
+	}
+	
 	@GetMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("login");
@@ -48,5 +53,20 @@ public class MainController {
 		
 		return mv;
 	}
+	
+	@GetMapping("/AccessDenied")
+	public ModelAndView AccessDeniedView() {
+		ModelAndView mv = new ModelAndView("noAuth");
+		
+		return mv;
+	}
+
+	/*
+	@GetMapping("/error")
+	public ModelAndView errorView() {
+		ModelAndView mv = new ModelAndView("error");
+		return mv;
+	}
+	*/
 
 }
