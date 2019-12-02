@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-${list}
+내 정보 : ${list}
 </body>
 </html>
