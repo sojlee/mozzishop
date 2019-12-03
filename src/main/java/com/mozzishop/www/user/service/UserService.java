@@ -10,5 +10,7 @@ public interface UserService {
 	User findByEmail(String email);
 	
 	void ChangeGrade(Grade grade, long idx);
+	
+	void SaveUser(User use);
 
 }

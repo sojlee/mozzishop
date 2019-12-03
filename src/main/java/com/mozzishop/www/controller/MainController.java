@@ -1,16 +1,13 @@
 package com.mozzishop.www.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mozzishop.www.resolver.SocialUser;
-import com.mozzishop.www.user.jpa.Grade;
 import com.mozzishop.www.user.jpa.User;
-import com.mozzishop.www.user.jpa.UserRepository;
 import com.mozzishop.www.user.service.UserService;
 
 @Controller
@@ -37,6 +34,15 @@ public class MainController {
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("login");
 		return mv;
+	}
+	
+	@PostMapping("/signed")
+	public String signed(@SocialUser User user) {
+		if(user==null) {
+			System.out.println("null 입니다.");
+		}
+		
+		return "redirect:/";
 	}
 	
 	@GetMapping("/loginSuccess")

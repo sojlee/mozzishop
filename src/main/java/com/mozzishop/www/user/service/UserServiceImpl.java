@@ -31,6 +31,12 @@ public class UserServiceImpl implements UserService{
 		userRepository.ChangeGrade(grade, idx);
 	}
 
+	@Override
+	public void SaveUser(User user) {
+		// TODO Auto-generated method stub
+		userRepository.save(user);
+	}
+
 
 
 }
